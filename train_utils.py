@@ -123,7 +123,7 @@ class Trainer:
         overwrite this function. 
         '''
         self.update_statistics(-1)
-        # self.show_game_board()
+        if self.verbosity: self.show_game_board()
         if (self.verbosity): print("Now Play")
         while len(self.remaining) > 0 and self.tries_remain > 0:
             if (self.verbosity): print(f"Tries remaining : {self.tries_remain}")
