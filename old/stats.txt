@@ -1,0 +1,4 @@
+Caveats: Using 100 games on the OG server to evaluate. Unlimited games on the local server.
+
+vanilla model geta 19% on the OG dataset.
+smart_greedy gets 21% on the OG dataset (one I have no fucking clue about).

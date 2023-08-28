@@ -1,0 +1,15 @@
+DEBUG:root:This is a debug message
+INFO:root:This is an info message
+WARNING:root:This is a warning message
+INFO:root:Accuracy with <class 'localagents.LocalHangman'>  0.193
+INFO:root:Accuracy with <class 'localagents.localGreedy'>  0.136
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.520
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.530
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.510
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.510
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.520
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.480
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.600
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.470
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.590
+INFO:root:Accuracy with <class 'localagents.ngramSolver'>  0.530

@@ -1,0 +1,2 @@
+* In Trainer.get_evaluation_tensors, maybe the probabilities in the true
+tensor should be proportional to the number of times the letter appears. 
