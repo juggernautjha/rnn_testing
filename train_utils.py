@@ -129,9 +129,12 @@ class Trainer:
             if (self.verbosity): print(f"Tries remaining : {self.tries_remain}")
             game_state = self.training_set['game_state'][-1:]
             guessed = self.training_set['guessed_one_hot'][-1:]
-            probab_vector = self.guessing_model(torch.stack(game_state), torch.stack(guessed))
+            probab_vector = self.guessing_model(torch.stack(game_state), torch.stack(guessed))[0][0]
             #! greedy
-            char_idx = torch.argmax(probab_vector[0][0]).item()
+            for i in range(len(guessed[0])):
+                if guessed[0][i] == 1:
+                    probab_vector[i] = 0.0
+            char_idx = torch.argmax(probab_vector).item()
             guess = IDX_TO_CHAR[char_idx+1]
             if (self.verbosity): print(guess)
             self.update_statistics(CHAR_TO_IDX[guess])
