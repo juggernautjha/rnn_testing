@@ -1,5 +1,5 @@
 from typing import Any
-from lightning.pytorch.utilities.types import STEP_OUTPUT
+#from lightning.pytorch.utilities.types import STEP_OUTPUT
 import torch
 import torch.nn as nn
 from torch.nn import Embedding, Linear, LSTM, Module
@@ -10,7 +10,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch.utils.data import Dataset
 
-import lightning as L
+#import lightning as L
 from torch.utils.data import TensorDataset, DataLoader
 
 
