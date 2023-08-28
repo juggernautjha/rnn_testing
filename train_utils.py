@@ -123,23 +123,23 @@ class Trainer:
         overwrite this function. 
         '''
         self.update_statistics(-1)
-        self.show_game_board()
-        print("Now Play")
+        # self.show_game_board()
+        if (self.verbosity): print("Now Play")
         while len(self.remaining) > 0 and self.tries_remain > 0:
-            print(f"Tries remaining : {self.tries_remain}")
+            if (self.verbosity): print(f"Tries remaining : {self.tries_remain}")
             game_state = self.training_set['game_state'][-1:]
             guessed = self.training_set['guessed_one_hot'][-1:]
             probab_vector = self.guessing_model(torch.stack(game_state), torch.stack(guessed))
             #! greedy
             char_idx = torch.argmax(probab_vector[0][0]).item()
             guess = IDX_TO_CHAR[char_idx+1]
-            print(guess)
+            if (self.verbosity): print(guess)
             self.update_statistics(CHAR_TO_IDX[guess])
-            print([IDX_TO_CHAR[i] for i in self.guessed])
+            if (self.verbosity): print([IDX_TO_CHAR[i] for i in self.guessed])
             self.game_state = torch.tensor([i if i in self.guessed else 27 for i in self.word_rep])
-            print(self.game_state)
-            self.show_game_board()
-        print(self.word)           
+            if (self.verbosity): print(self.game_state)
+            # self.show_game_board()
+        if (self.verbosity): print(self.word)           
     def game_stats(self):
         status = self.tries_remain != 0
         return status  
@@ -163,7 +163,7 @@ class Train_on_Batch():
         self.guessing_model = guessing_model
         self.num_games = num_games
         self.tries = tries
-        self.verbose = True
+        self.verbose = verbose
         self.batch_memory = {
             'game_state' : [],
             'game_state_one_hot' : [],

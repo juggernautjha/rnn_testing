@@ -1,6 +1,6 @@
 - max_len: 30
 - vocab_size: 27 #26 letters + _
-- embedding_dim: 8
+- embedding_dim: 4
 - n_lstm: 2
 - hidden_dim: 30
 - dense_dim_lstm: 60

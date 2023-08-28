@@ -161,6 +161,11 @@ def compute_loss(model, dataset):
     return all_losses
 
 
+
+
+
+
+
 def train_one_batch(model, game_state, guessed, expected, epochs, optimizer):
     '''
     Trains model for batch.
@@ -170,9 +175,9 @@ def train_one_batch(model, game_state, guessed, expected, epochs, optimizer):
         guessed : torch.Tensor -> tensor of one hot encoded tensors of guessed states.
         expected : torch.Tensor -> tensor of expected prbabilities. 
     '''
+
     pbar = tqdm(range(epochs))
     for i in pbar:
-        print(i)
         pred, _ , _ = model(game_state, guessed)
         loss = F.binary_cross_entropy(pred, expected)
         pbar.set_description("%.3f loss" % loss)
@@ -180,7 +185,14 @@ def train_one_batch(model, game_state, guessed, expected, epochs, optimizer):
         
         loss.backward()
         optimizer.step()
-        
+
+def validate(model, game_state, guessed, expected):
+    '''
+    Pretty obvious. Validation go brr.
+    '''
+    pred, _ , _ = model(game_state, guessed)
+    loss = F.binary_cross_entropy(pred, expected)
+    return loss
 
 
 
