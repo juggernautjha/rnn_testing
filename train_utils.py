@@ -122,6 +122,8 @@ class Trainer:
         Makeshift function for debugging. The true trainer class will inherit from this and
         overwrite this function. 
         '''
+        correct_guesses = 0
+        wrong_guesses = 0
         self.update_statistics(-1)
         if self.verbosity: self.show_game_board()
         if (self.verbosity): print("Now Play")
@@ -136,13 +138,16 @@ class Trainer:
                     probab_vector[i] = 0.0
             char_idx = torch.argmax(probab_vector).item()
             guess = IDX_TO_CHAR[char_idx+1]
+            if guess in self.word: correct_guesses += 1
+            else: wrong_guesses += 1
             if (self.verbosity): print(guess)
             self.update_statistics(CHAR_TO_IDX[guess])
             if (self.verbosity): print([IDX_TO_CHAR[i] for i in self.guessed])
             self.game_state = torch.tensor([i if i in self.guessed else 27 for i in self.word_rep])
             if (self.verbosity): print(self.game_state)
             # self.show_game_board()
-        if (self.verbosity): print(self.word)           
+        if (self.verbosity): print(self.word)     
+        return correct_guesses, wrong_guesses, self.tries_remain != 0      
     def game_stats(self):
         status = self.tries_remain != 0
         return status  
@@ -197,6 +202,33 @@ class Train_on_Batch():
         expected = torch.stack(self.batch_memory['expected_letters'])
         return game_state, guessed, expected
 
+
+
+class Evaluator(Train_on_Batch):
+    '''
+    Likely overkill but evaluates the model after each epoch. The way it does it is:
+        Play N games.
+        Keeps track of:
+            - Correct Guesses/Game
+            - Wrong Guesses/Game
+            - Games Won      
+    '''
+    def __init__(self, word_list: str, guessing_model, num_games: int = 10, tries: int = 6, verbose: bool = True):
+        super().__init__(word_list, guessing_model, num_games, tries, verbose)
+
+    def evaluate(self):
+        correct = 0
+        incorrect = 0
+        games_won = 0
+        for i in range(self.num_games):
+            word = random.randint(0, len(self.words)-1)
+            word = self.words[word]
+            player = Trainer(word, self.guessing_model, self.tries, self.verbose)
+            c, ic, gw = player.play()
+            correct += c
+            incorrect += ic
+            if gw: games_won += 1
+        return correct/self.num_games, incorrect/self.num_games, games_won/self.num_games
 
     
 if __name__ == '__main__':
