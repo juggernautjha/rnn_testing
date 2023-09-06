@@ -222,11 +222,6 @@ class Train_on_Batch():
         }
 
 if __name__ == '__main__':
-    # n = Trainer("rahul", None, 7)
-    # n.guessed = [17]
-    # print(n.remaining)
-    # print(n.get_game_state())
-    # # print(n.get_guessed_onehot(17))
     model = Model("base_config")
     wl = "/home/juggernautjha/Desktop/trexquant/rnn_testing/data/250k_complement.txt"
     trainer = Train_on_Batch(wl, model, 1)
