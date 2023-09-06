@@ -18,7 +18,7 @@ def pad_tensor(t : typing.List, length : int = MAXLEN):
     else:
         return [0]*(MAXLEN - len(t)) + t
 
-class Trainer:
+class Trainer():
     '''
     Class to create training data.
     Parameters:
@@ -162,6 +162,16 @@ class Trainer:
     def game_stats(self):
         status = self.tries_remain != 0
         return status  
+
+
+
+# class GreedyTrainer(Trainer):
+#     def __init__(self, word : str, guessing_model, tries : int = 6, verbose : bool = False):
+#         super.__init__(self, word, guessing_model)
+
+
+
+
 
 class Train_on_Batch():
     '''
