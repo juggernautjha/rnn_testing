@@ -8,7 +8,7 @@ import yaml
 
 #! Keras implementation of rnn_testing/pytorch/model.py
 
-CONFIGS = "../configs"
+CONFIGS = "configs"
 
 class KerasModel():
     """
